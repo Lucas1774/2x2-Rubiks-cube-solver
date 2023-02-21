@@ -1,0 +1,2 @@
+.\solver.exe
+PAUSE
