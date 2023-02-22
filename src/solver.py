@@ -117,7 +117,7 @@ def solve(state):
         solveDFS(state)
     else:
         solveDirect(state)
-    print("Time elapsed: {:.2f} seconds".format(time.time()-sTime))
+    print("Time elapsed: {:.3f} seconds".format(time.time()-sTime))
 
 def ask (s):
     print(s)
@@ -125,9 +125,9 @@ def ask (s):
 
 if __name__ == '__main__':
     o = 'Y'
-    while o != '':
+    while o != 'n':
         cube = Cube()
         scramble = getScramble()
         mix (cube, scramble)
         solve(cube.getState())
-        o = ask("Again?  [Y/N]")
+        o = ask("Again?  [Y/n]")
