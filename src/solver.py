@@ -1,11 +1,14 @@
 import time
 import random
+import os
+import pickle
 from cube import Cube
 
 MOVE_KEY = {0 : 'U', 1 : 'F', 2 : 'R', 'U' : 0, 'F' : 1, 'R' : 2}
 ITERATOR_KEY = {0 : ' ', 1 : '2', 2 : '\'', ' ' : 0, '2' : 1, '\'' : 2}
 SCRAMBLE_LENGTH = 15
 DICT = {}
+DICTPATH = 'src/dictionary.pickle'
 
 def generateScramble(l):
     aux = ""
@@ -87,13 +90,22 @@ def solveBFS(state, mode):
                                 next.append([auxState[0] + MOVE_KEY[j] + ITERATOR_KEY[k] + " ", aux.getState()])
 
 def solveDirect(state):
+    global DICT
     def inverseSequence(sequence):
         inverses = {"U": "U'", "U'": "U", "U2" : "U2", "F": "F'", "F'": "F", "F2" : "F2", "R": "R'", "R'": "R", "R2" : "R2"}
         moves = sequence.split()
         return " ".join([inverses[move] for move in reversed(moves)])
     if len(DICT) == 0:
-        print("Filling dictionary")
-        solveBFS([0, 3, 6, 9 ,12 ,15, 18, 21], '2')
+        if not os.path.exists(DICTPATH):
+            print("Filling dictionary")
+            solveBFS([0, 3, 6, 9 ,12 ,15, 18, 21], '2')
+            print("Saving dictionary to " + DICTPATH)
+            with open(DICTPATH, 'wb') as f:
+                pickle.dump(DICT, f)
+        else:
+            print("Filling dictionary from " + DICTPATH)
+            with open(DICTPATH, 'rb') as f:
+                DICT = pickle.load(f)
     print(inverseSequence(DICT[tuple(cube.getState())]))
 
 def solve(state):
@@ -112,8 +124,10 @@ def ask (s):
     return input()
 
 if __name__ == '__main__':
-    while True:
+    o = 'Y'
+    while o != '':
         cube = Cube()
         scramble = getScramble()
         mix (cube, scramble)
         solve(cube.getState())
+        o = ask("Again?  [Y/N]")
