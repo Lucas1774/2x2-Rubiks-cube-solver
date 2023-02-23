@@ -22,7 +22,8 @@ Fun fact, if I was to extend the breadth-first algorithm into the 3x3 cube it wo
 
 ## Usage
 
-The first time you run the "direct" algorithm it will write a .pickle file in a "src" folder (that must exist) next to the executable or the directory python solver.py is called from. It will look like this:  
+The first time you run the "direct" algorithm it will write a .pickle file in a "src" folder (that must exist) next to the executable or the directory python solver.py is called from. It will look like this:
+
     scramble: R  F2 U2 R' U2 F' R' U' F  U2 F  U2 R2 U  R2
     Mode?
     1 - Direct
