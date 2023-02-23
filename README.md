@@ -46,7 +46,8 @@ The first time you run the "direct" algorithm it will write a .pickle file in a 
     R U' R U2 F U' R' F U
     Time elapsed: 49.02 seconds
 
-After that, the solution will be directly found:  
+After that, the solution will be directly found:
+
     Mode?
     1 - Autogenerate
     2 - Paste
@@ -60,7 +61,8 @@ After that, the solution will be directly found:
     R U' F R' F2 R F R' F2
     Time elapsed: 0.00 seconds
 
-In subsequent executions of the program it will import the dictionary in the "src" folder (only for the first scramble):  
+In subsequent executions of the program it will import the dictionary in the "src" folder (only for the first scramble):
+
     scramble: F2 U' F2 R2 F2 R  U  R' F  U' F  U2 F' U  F
     Mode?
     1 - Direct
