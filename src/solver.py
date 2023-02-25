@@ -108,7 +108,7 @@ def solveDirect(state):
             print("Filling dictionary from " + DICTPATH)
             with open(DICTPATH, 'rb') as f:
                 DICT = pickle.load(f)
-    print(inverseSequence(DICT[tuple(cube.getState())]))
+    print("solution: " + inverseSequence(DICT[tuple(cube.getState())]))
 
 def solve(state):
     o = ask("Mode?\n" + "1 - Direct\n" + "2 - BFS\n" + "3 - DFS")
