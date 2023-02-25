@@ -24,12 +24,14 @@ def getScramble():
         scramble = ask("Input scramble")
     else:
         scramble = generateScramble(SCRAMBLE_LENGTH)
-    print("scramble: " + scramble)
+    print("scramble: " + ' '.join(scramble.split()))
     return scramble
     
 def mix(cube, scramble):
-    for i in range(SCRAMBLE_LENGTH):
-        move = (scramble[3 * i : 3 * i + 2])
+    aux = scramble.split()
+    for move in aux:
+        if len(move) == 1:
+            move += ' '
         for j in range(ITERATOR_KEY[move[1]] + 1):
             cube.turn(MOVE_KEY[move[0]])
                                 
@@ -43,11 +45,11 @@ def solveDFS(state):
                     aux.turn(i)
                     if not tuple(aux.getState()) in visited:
                         if aux.isSolved():
-                            print ("solution: " + solution + MOVE_KEY[i] + ITERATOR_KEY[j])
+                            print ("solution: " + ' '.join((solution + MOVE_KEY[i] + ITERATOR_KEY[j]).split()))
                             print ("visited states the last iteration: " + str(len(visited)))
                             return True
                         visited.add(tuple(aux.getState()))
-                        if depth != 0:
+                        if depth != 1:
                             if search(aux.getState(), solution + MOVE_KEY[i] + ITERATOR_KEY[j]+ " ", depth - 1, i, visited):
                                 return True
         return False
@@ -78,7 +80,7 @@ def solveBFS(state, mode):
                         aux.turn(j)
                         if mode == '1':
                             if aux.isSolved():
-                                print ("solution: " + auxState[0] + MOVE_KEY[j] + ITERATOR_KEY[k])
+                                print ("solution: " + ' '.join((auxState[0] + MOVE_KEY[j] + ITERATOR_KEY[k]).split()))
                                 print ("visited states: " + str(len(visited)))
                                 return
                             if not tuple(aux.getState()) in visited:
@@ -94,7 +96,7 @@ def solveDirect(state):
     def inverseSequence(sequence):
         inverses = {"U": "U'", "U'": "U", "U2" : "U2", "F": "F'", "F'": "F", "F2" : "F2", "R": "R'", "R'": "R", "R2" : "R2"}
         moves = sequence.split()
-        return " ".join([inverses[move] for move in reversed(moves)])
+        return ' '.join([inverses[move] for move in reversed(moves)])
     if len(DICT) == 0:
         if not os.path.exists(DICTPATH):
             print("Filling dictionary")
