@@ -23,6 +23,9 @@ class Cube:
 
     def setState(self, state):
         self.state = [e for e in state]
+
+    def getSolvedState(self):
+        return SOLVED_STATE
     
     def isSolved(self):
         return self.state == list(SOLVED_STATE)
@@ -46,4 +49,13 @@ class Cube:
             aux[4] = STICKER_FIXER[self.state[5], 2]
         self.state = [e for e in aux]
 
+    def hasAtLeastXPiecesSolved(self, x):
+        count = 0
+        for i in range(8):
+            if self.state[i] == 3 * i:
+                count +=1
+                if count == x:
+                    return True
+        return False
+    
 fillFixer()
