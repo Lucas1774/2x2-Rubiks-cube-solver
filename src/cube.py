@@ -49,7 +49,7 @@ class Cube:
             aux[4] = STICKER_FIXER[self.state[5], 2]
         self.state = [e for e in aux]
 
-    def hasAtLeastXPiecesSolved(self, x):
+    def hasAtLeastXPiecesSolved(self, x): #TODO: replace with hasAtLeastXAdjacentPiecesSolved()
         count = 0
         for i in range(8):
             if self.state[i] == 3 * i:
