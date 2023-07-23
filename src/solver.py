@@ -85,7 +85,8 @@ def solveBFS(state, mode):
                                 return
                             if not tuple(aux.getState()) in visited:
                                 visited.add(tuple(aux.getState()))
-                                next.append([auxState[0] + MOVE_KEY[j] + ITERATOR_KEY[k] + " ", aux.getState()])
+                                if depth < 9 or ( depth == 9 and aux.hasAtLeastXPiecesSolved(2)) or (depth == 10 and aux.hasAtLeastXPiecesSolved(4)):
+                                    next.append([auxState[0] + MOVE_KEY[j] + ITERATOR_KEY[k] + " ", aux.getState()])
                         else:
                             if not tuple(aux.getState()) in DICT:
                                 DICT[tuple(aux.getState())]= auxState[0] + MOVE_KEY[j] + ITERATOR_KEY[k] + " "
@@ -100,7 +101,7 @@ def solveDirect(state):
     if len(DICT) == 0:
         if not os.path.exists(DICTPATH):
             print("Filling dictionary")
-            solveBFS([0, 3, 6, 9 ,12 ,15, 18, 21], '2')
+            solveBFS(Cube().getSolvedState(), '2')
             print("Saving dictionary to " + DICTPATH)
             with open(DICTPATH, 'wb') as f:
                 pickle.dump(DICT, f)
@@ -108,7 +109,7 @@ def solveDirect(state):
             print("Filling dictionary from " + DICTPATH)
             with open(DICTPATH, 'rb') as f:
                 DICT = pickle.load(f)
-    print("solution: " + inverseSequence(DICT[tuple(cube.getState())]))
+    print("solution: " + inverseSequence(DICT[tuple(state)]))
 
 def solve(state):
     o = ask("Mode?\n" + "1 - Direct\n" + "2 - BFS\n" + "3 - DFS")
