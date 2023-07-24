@@ -2,7 +2,7 @@
 
 To write my first Python code, this is a pathfinding approach to solve the Rubik's cube. Three pathfinding approaches:
 
-The first approach is a breadth-first search that uses a "visited" logic to avoid adding nodes already in the queue. Notice that the solutionness of a state is checked right before adding it to the list, as supposed to when popped from it. This makes finding the solution way faster, even if the time to explore the whole space (around 40 seconds on my pc) is about 10% slower, due to the "next" lists being longer.  
+The first approach is a breadth-first search that uses a "visited" logic to avoid adding nodes already in the queue. Notice that the solubility of a state is checked right before adding it to the list, as supposed to when popped from it. This makes finding the solution way faster, even if the time to explore the whole space (around 40 seconds on my pc) is about 10% slower, due to the "next" lists being longer.  
 Another way to speed it up about another 10% would be to get rid of the per-depth-level logic and just add items to the list till it's empty. The data types are correct, so it's only about reducing the amount of O(1) operations.
 
 The second is an iterative depth approach, that doesn't necessarily find the best solution, nor it explores the whole space faster (it takes about twice the time) but brings some attention to the unintuitive behaviors of depth-first pathfinding:  
