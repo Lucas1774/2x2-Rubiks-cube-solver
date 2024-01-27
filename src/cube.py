@@ -1,5 +1,6 @@
-SOLVED_STATE = (0,3,6,9,12,15,18,21)
+SOLVED_STATE = (0, 3, 6, 9, 12, 15, 18, 21)
 STICKER_FIXER = {}
+
 
 def fillFixer():
     def stickerFixer(piece, rotation):
@@ -9,10 +10,11 @@ def fillFixer():
             return piece + 1 if rotation == 1 else piece - 1
         else:
             return piece - 2 if rotation == 1 else piece - 1
-        
+
     for i in range(24):
         for j in range(1, 3):
             STICKER_FIXER[(i, j)] = stickerFixer(i, j)
+
 
 class Cube:
     def __init__(self):
@@ -26,7 +28,7 @@ class Cube:
 
     def getSolvedState(self):
         return SOLVED_STATE
-    
+
     def isSolved(self):
         return self.state == list(SOLVED_STATE)
 
@@ -49,13 +51,23 @@ class Cube:
             aux[4] = STICKER_FIXER[self.state[5], 2]
         self.state = [e for e in aux]
 
-    def hasAtLeastXPiecesSolved(self, x): #TODO: replace with hasAtLeastXAdjacentPiecesSolved()
-        count = 0
-        for i in range(8):
-            if self.state[i] == 3 * i:
-                count +=1
-                if count == x:
-                    return True
+    # The next are a good enough approach to "can be solved in 1 / 2 moves"
+    def hasAtLeast4AdjacentPiecesSolved(self):
+        if self.state[4] == 12 and self.state[5] == 15 and self.state[7] == 21:
+            return True, "D"
+        if self.state[2] == 6 and self.state[3] == 9 and self.state[5] == 15:
+            return True, "B"
+        if self.state[1] == 3 and self.state[2] == 6 and self.state[7] == 21:
+            return True, "L"
         return False
-    
+
+    def hasAtLeast2AdjacentPiecesSolved(self):
+        if self.state[5] == 15:
+            return True, "DBR"
+        if self.state[2] == 6:
+            return True, "UBL"
+        if self.state[7] == 21:
+            return True, "DFL"
+
+
 fillFixer()

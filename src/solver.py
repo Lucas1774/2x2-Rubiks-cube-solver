@@ -85,7 +85,7 @@ def solveBFS(state, mode):
                                 return
                             if not tuple(aux.getState()) in visited:
                                 visited.add(tuple(aux.getState()))
-                                if depth < 9 or ( depth == 9 and aux.hasAtLeastXPiecesSolved(2)) or (depth == 10 and aux.hasAtLeastXPiecesSolved(4)):
+                                if depth < 9 or (depth == 9 and aux.hasAtLeast2AdjacentPiecesSolved()) or (depth == 10 and aux.hasAtLeast4AdjacentPiecesSolved()):
                                     next.append([auxState[0] + MOVE_KEY[j] + ITERATOR_KEY[k] + " ", aux.getState()])
                         else:
                             if not tuple(aux.getState()) in DICT:
